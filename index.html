@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0e8a68">
+<style>[hidden]{display:none!important}img{max-width:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>การ์ดทรัพย์ ชุดคัดกลางภาค</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&family=Noto+Serif+Thai:wght@500;600&family=IBM+Plex+Mono:wght@600;700&display=swap">
+</head>
+<body>
+<style>
+:root{
+  --text:#16261f; --muted:#4f6159; --accent:#0e8a68; --accent-2:#2f6fe0; --good:#0f9d63; --warn:#d9691f; --gold:#a8741a;
+  --glass-bg:rgba(255,255,255,.50); --glass-bg-strong:rgba(255,255,255,.74); --glass-border:rgba(255,255,255,.7);
+  --glass-shadow:rgba(20,50,45,.16); --track-bg:rgba(255,255,255,.4); --law-bg:rgba(14,138,104,.08); --note-bg:rgba(217,105,31,.12);
+  --blob1:#a9e6d2; --blob2:#b9ccff; --blob3:#ffe0b3; --base1:#eef6f3; --base2:#e2ecf6;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  color-scheme:dark; --text:#eaf3ef; --muted:#a3b5ad; --accent:#56d6ae; --accent-2:#7ea6ff; --good:#5fe3ae; --warn:#f0a875; --gold:#e6bd6a;
+  --glass-bg:rgba(22,34,32,.5); --glass-bg-strong:rgba(22,34,32,.76); --glass-border:rgba(255,255,255,.12);
+  --glass-shadow:rgba(0,0,0,.5); --track-bg:rgba(0,0,0,.28); --law-bg:rgba(86,214,174,.10); --note-bg:rgba(240,168,117,.14);
+  --blob1:#1d5a4a; --blob2:#2c3d85; --blob3:#5a3d1a; --base1:#0d1614; --base2:#121a24;}}
+:root[data-theme="dark"]{
+  color-scheme:dark; --text:#eaf3ef; --muted:#a3b5ad; --accent:#56d6ae; --accent-2:#7ea6ff; --good:#5fe3ae; --warn:#f0a875; --gold:#e6bd6a;
+  --glass-bg:rgba(22,34,32,.5); --glass-bg-strong:rgba(22,34,32,.76); --glass-border:rgba(255,255,255,.12);
+  --glass-shadow:rgba(0,0,0,.5); --track-bg:rgba(0,0,0,.28); --law-bg:rgba(86,214,174,.10); --note-bg:rgba(240,168,117,.14);
+  --blob1:#1d5a4a; --blob2:#2c3d85; --blob3:#5a3d1a; --base1:#0d1614; --base2:#121a24;}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;color:var(--text);font-family:"Noto Sans Thai",system-ui,sans-serif;
+  background:radial-gradient(circle at 10% 15%,var(--blob1) 0%,transparent 45%),radial-gradient(circle at 90% 10%,var(--blob2) 0%,transparent 45%),radial-gradient(circle at 50% 100%,var(--blob3) 0%,transparent 55%),linear-gradient(180deg,var(--base1),var(--base2));
+  background-color:var(--base1);background-attachment:fixed;padding-inline:16px;padding-block:14px 30px;display:flex;justify-content:center}
+.app{width:100%;max-width:620px;display:flex;flex-direction:column;gap:16px}
+.mono{font-family:"IBM Plex Mono","Noto Sans Thai",monospace;font-variant-numeric:tabular-nums}
+.glass{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:22px;box-shadow:0 8px 28px var(--glass-shadow);-webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%)}
+header{display:flex;flex-direction:column;gap:6px;padding-top:6px}
+.eyebrow{font-size:12px;letter-spacing:.1em;color:var(--muted);font-weight:700}
+h1{margin:0;font-size:24px;font-weight:800;line-height:1.35;text-wrap:balance}
+.sub{margin:0;font-size:13px;line-height:1.65;color:var(--muted)}
+.grouprow{display:flex;gap:10px;overflow-x:auto;padding:4px 2px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.grouprow::-webkit-scrollbar{height:0}
+.gchip{flex:0 0 auto;font:inherit;font-size:14px;font-weight:700;color:var(--muted);padding:10px 16px;border-radius:14px;border:1px solid var(--glass-border);background:var(--glass-bg);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);cursor:pointer;white-space:nowrap}
+.gchip .n{font-family:"IBM Plex Mono",monospace;font-size:12px;opacity:.75;margin-left:6px}
+.gchip[aria-pressed="true"]{color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-2));border-color:transparent;box-shadow:0 6px 18px var(--glass-shadow)}
+.gchip.exam[aria-pressed="false"]{color:var(--gold)}
+.statusbar{display:flex;align-items:center;gap:12px;padding:12px 16px;font-size:13px;color:var(--muted)}
+.track{flex:1;height:9px;border-radius:999px;background:var(--track-bg);overflow:hidden}
+.fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .25s ease}
+.stage{perspective:1800px}
+.card{display:grid;min-height:360px;border-radius:26px;cursor:pointer;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.2,.8,.2,1);touch-action:pan-y}
+.card.flipped{transform:rotateY(180deg)}
+.card:focus-visible{outline:3px solid var(--accent);outline-offset:6px}
+.face{grid-area:1/1;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:26px;background:var(--glass-bg-strong);border:1px solid var(--glass-border);box-shadow:0 14px 38px var(--glass-shadow);-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);padding:22px 22px 16px;display:flex;flex-direction:column;min-width:0}
+.face.back{transform:rotateY(180deg);max-height:74vh;max-height:74dvh}
+.facehead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;min-height:30px}
+.cattag{font-size:13px;letter-spacing:.03em;color:var(--muted);font-weight:700}
+.numtag{font-size:13px;font-weight:700;color:#fff;padding:5px 12px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));flex:0 0 auto}
+.numtag.exam{background:linear-gradient(135deg,var(--gold),var(--warn))}
+.state{font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:9px}
+.state.know{color:var(--good);background:rgba(15,157,99,.12)} .state.review{color:var(--warn);background:var(--note-bg)}
+.frontbody{flex:1;display:flex;flex-direction:column;justify-content:center;gap:14px;padding-block:10px}
+.big{font-size:clamp(40px,12vw,64px);font-weight:800;line-height:1.15;letter-spacing:-.01em;text-align:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.big small{display:block;font-size:.42em;font-weight:700;letter-spacing:0;margin-top:6px}
+.ask{font-size:clamp(21px,5.8vw,26px);font-weight:800;line-height:1.5;text-wrap:pretty}
+.src{font-size:14px;line-height:1.6;color:var(--gold);font-weight:600}
+.hint{text-align:center;font-size:12.5px;color:var(--muted);margin-top:8px}
+.backbody{flex:1;overflow-y:auto;overscroll-behavior:contain;padding-right:4px;font-size:clamp(17px,4.6vw,19px);line-height:1.65;font-weight:500}
+.backbody .topic{font-size:1.12em;font-weight:800;margin:0 0 10px;color:var(--text)}
+.backbody p{margin:0 0 10px} .backbody ul,.backbody ol{margin:0 0 10px;padding-left:1.25em} .backbody li{margin:0 0 6px}
+.backbody b{color:var(--accent);font-weight:800}
+.backbody h4{margin:14px 0 6px;font-size:.8em;letter-spacing:.06em;color:var(--accent-2);font-weight:800}
+.law{font-family:"Noto Serif Thai","Noto Sans Thai",serif;font-weight:500;background:var(--law-bg);border-left:4px solid var(--accent);border-radius:4px 14px 14px 4px;padding:10px 14px;margin:0 0 12px;line-height:1.75}
+.law .v{display:block;margin-top:6px}
+.note{background:var(--note-bg);border-radius:14px;padding:10px 14px;margin:12px 0 4px;font-size:.92em}
+.note b{color:var(--warn)}
+.markrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+button{font:inherit;font-size:15px;font-weight:700;border-radius:16px;border:1px solid var(--glass-border);background:var(--glass-bg);color:var(--text);padding:14px 16px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);transition:background .12s,transform .08s,color .12s}
+button:active{transform:scale(.98)}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button.know[aria-pressed="true"]{color:#fff;background:linear-gradient(135deg,var(--good),var(--accent-2));border-color:transparent}
+button.review[aria-pressed="true"]{color:#fff;background:linear-gradient(135deg,var(--warn),var(--gold));border-color:transparent}
+.navrow{display:flex;align-items:center;gap:12px}
+button.icon{width:56px;height:56px;padding:0;border-radius:50%;flex:0 0 auto;font-size:14px}
+button.primary{flex:1;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-2));border-color:transparent;box-shadow:0 8px 22px var(--glass-shadow)}
+.toolrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.toolrow button{font-size:13.5px;padding:10px 14px}
+.toolrow button[aria-pressed="true"]{color:#fff;background:linear-gradient(135deg,var(--warn),var(--gold));border-color:transparent}
+footer{padding:14px 16px;font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:10px}
+footer .row{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+footer b{color:var(--text)}
+footer .fnote{font-size:12px;line-height:1.75}
+.guide{margin-top:18px;border:1.5px dashed var(--gold);border-radius:18px;padding:14px 16px;background:rgba(168,116,26,.07)}
+.gtitle{font-weight:800;color:var(--gold);letter-spacing:.03em;margin-bottom:8px}
+.gstep{border-top:1px solid var(--glass-border);padding-top:8px;margin-top:8px}
+.gstep:first-of-type{border-top:0;margin-top:0;padding-top:0}
+.gstep p{margin:0 0 6px}
+.guide b{color:var(--gold)}
+.empty{grid-area:1/1;padding:40px 20px;text-align:center;font-size:18px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+</style>
+
+<div class="app">
+  <header>
+    <span class="eyebrow">CULAW Y1S1 กฎหมายว่าด้วยทรัพย์</span>
+    <h1>แฟลชการ์ดทรัพย์ ก่อนสอบกลางภาค</h1>
+  </header>
+
+  <nav class="grouprow" id="grouprow" aria-label="กรองตามหมวด"></nav>
+
+  <div class="statusbar glass">
+    <span class="mono" id="posLabel">1 จาก 1</span>
+    <div class="track"><div class="fill" id="progFill"></div></div>
+    <span id="knowLabel">จำได้ 0</span>
+  </div>
+
+  <div class="stage">
+    <div class="card" id="card" tabindex="0" role="button" aria-label="แตะเพื่อพลิกการ์ด">
+      <div class="face front" id="front"></div>
+      <div class="face back" id="back"></div>
+    </div>
+  </div>
+
+  <div class="markrow">
+    <button class="review" id="btnReview" type="button" aria-pressed="false">ยังไม่แม่น</button>
+    <button class="know" id="btnKnow" type="button" aria-pressed="false">จำได้แล้ว</button>
+  </div>
+  <div class="navrow">
+    <button class="icon glass" id="btnPrev" type="button" aria-label="ก่อนหน้า">ย้อน</button>
+    <button class="primary" id="btnFlip" type="button">พลิกการ์ด</button>
+    <button class="icon glass" id="btnNext" type="button" aria-label="ถัดไป">ถัด</button>
+  </div>
+  <div class="toolrow">
+    <button id="btnShuffle" type="button">สลับสุ่ม</button>
+    <button id="btnUnsure" type="button" aria-pressed="false">ทวนเฉพาะที่ยังไม่แม่น</button>
+    <button id="btnReset" type="button">รีเซ็ตความคืบหน้า</button>
+  </div>
+
+  <footer class="glass">
+    <div class="row"><span>ทั้งหมด <b id="sTotal">0</b> ใบ</span><span>จำได้แล้ว <b id="sKnow">0</b></span><span>ยังไม่แม่น <b id="sReview">0</b></span></div>
+  </footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var GROUPS=[['A','ทรัพย์และทรัพย์สิน'],['B','ส่วนควบ อุปกรณ์ ดอกผล'],['C','สาธารณสมบัติ'],['D','กรรมสิทธิ์ ครอบครอง ภาระจำยอม'],['E','มาตรา 1299 ถึง 1303'],['F','มาตราประกอบ'],['G','ฎีกาสำคัญ'],['H','หลักคิดเชื่อมมาตรา']];
+var GN={}; GROUPS.forEach(function(g){GN[g[0]]=g[1];});
+function U(t){return '<div class="note"><b>ไม่แน่ใจ</b> '+t+'</div>';}
+function L(t){return '<div class="law">'+t+'</div>';}
+
+/* k: 'm' มาตรา (หน้าแสดงแค่เลข), 'd' ฎีกา (หน้าแสดงแค่เลข), 'q' คำถาม
+   n: ข้อความใหญ่ด้านหน้า, t: หัวเรื่องที่เฉลยด้านหลัง */
+var CARDS=[{"g":"A","k":"m","n":"137","t":"นิยามทรัพย์","b":"<div class=\"law\">มาตรา 137 ทรัพย์ หมายความว่า วัตถุมีรูปร่าง</div><p>องค์ประกอบมี<b>ข้อเดียว</b> คือเป็นวัตถุมีรูปร่าง</p><p>ทรัพย์คือตัววัตถุ สิทธิเหนือทรัพย์คือทรัพยสิทธิ แต่<b>ทรัพยสิทธิไม่ใช่ทรัพย์</b></p>"},
+{"g":"A","k":"m","n":"138","t":"นิยามทรัพย์สิน","b":"<div class=\"law\">มาตรา 138 ทรัพย์สิน หมายความรวมทั้งทรัพย์และวัตถุไม่มีรูปร่าง ซึ่งอาจมีราคาและอาจถือเอาได้</div><ol><li>เป็นทรัพย์ หรือวัตถุไม่มีรูปร่าง</li><li><b>อาจมีราคา</b> มีคุณค่า ไม่จำเป็นต้องมีราคาตลาด</li><li><b>อาจถือเอาได้</b> หวงกันไว้เพื่อตนได้</li></ol><p>บุคคลสิทธิ เช่น สิทธิเรียกร้องตามหนี้ ก็เป็นทรัพย์สิน จึงโอนหนี้กันได้</p>"},
+{"g":"A","k":"m","n":"139","t":"นิยามอสังหาริมทรัพย์","b":"<div class=\"law\">มาตรา 139 อสังหาริมทรัพย์ หมายความว่า ที่ดินและทรัพย์อันติดอยู่กับที่ดินมีลักษณะเป็นการถาวรหรือประกอบเป็นอันเดียวกับที่ดินนั้น และหมายความรวมถึงทรัพยสิทธิอันเกี่ยวกับที่ดินหรือทรัพย์อันติดอยู่กับที่ดินหรือประกอบเป็นอันเดียวกับที่ดินนั้นด้วย</div><h4>4 กลุ่ม</h4><ol><li>ที่ดิน</li><li>ทรัพย์ติดที่ดินเป็นการถาวร โดยสภาพ เช่น ไม้ยืนต้น หรือโดยคนทำให้ติด เช่น บ้าน รั้ว</li><li>ทรัพย์ประกอบเป็นอันเดียวกับที่ดิน เช่น กรวด ทราย แร่</li><li><b>ทรัพยสิทธิ</b>อันเกี่ยวกับสามกลุ่มแรก</li></ol><p>ฎีกาที่ 108 ปี 2516 ดูที่สภาพการติดถาวร · เจ้าของอสังหาดูจากทะเบียน</p>"},
+{"g":"A","k":"m","n":"140","t":"นิยามสังหาริมทรัพย์","b":"<div class=\"law\">มาตรา 140 สังหาริมทรัพย์ หมายความว่า ทรัพย์สินอื่นนอกจากอสังหาริมทรัพย์ และหมายความรวมถึงสิทธิอันเกี่ยวกับทรัพย์สินนั้นด้วย</div><p>นิยามแบบ<b>ตัดออก</b> ทรัพย์สินใดไม่ใช่อสังหา ย่อมเป็นสังหา</p><ol><li>ทรัพย์ที่เคลื่อนที่ได้</li><li>กำลังแรงธรรมชาติที่อาจถือเอาได้ เช่น ไอน้ำ แก๊ส</li><li>สิทธิอันเกี่ยวกับสังหา</li></ol><p>เจ้าของสังหาดูจากการครอบครอง</p>"},
+{"g":"A","k":"m","n":"141","t":"ทรัพย์แบ่งได้","b":"<div class=\"law\">มาตรา 141 ทรัพย์แบ่งได้ หมายความว่า ทรัพย์อันอาจแยกออกจากกันเป็นส่วน ๆ ได้จริง ถนัดชัดแจ้ง แต่ละส่วนได้รูปบริบูรณ์ลำพังตัว</div><p>เกณฑ์เดียว แยกแล้วแต่ละส่วน<b>ยังสมบูรณ์ในตัวเอง</b></p>"},
+{"g":"A","k":"m","n":"142","t":"ทรัพย์แบ่งไม่ได้","b":"<div class=\"law\">มาตรา 142 ทรัพย์แบ่งไม่ได้ หมายความว่า ทรัพย์อันจะแยกออกจากกันไม่ได้นอกจากเปลี่ยนแปลงภาวะของทรัพย์ และหมายความรวมถึงทรัพย์ที่มีกฎหมายบัญญัติว่าแบ่งไม่ได้ด้วย</div><ol><li><b>โดยสภาพ</b> เช่น ช้าง บ้าน ฎีกาที่ 1303 ปี 2510 ช้างร่วมเจ้าของ ริบได้เพียงกึ่งหนึ่ง</li><li><b>โดยกฎหมาย</b> เช่น ส่วนควบตามมาตรา 144</li></ol>"},
+{"g":"A","k":"m","n":"143","t":"ทรัพย์นอกพาณิชย์","b":"<div class=\"law\">มาตรา 143 ทรัพย์นอกพาณิชย์ หมายความว่า ทรัพย์ที่ไม่สามารถถือเอาได้และทรัพย์ที่โอนแก่กันมิได้โดยชอบด้วยกฎหมาย</div><ol><li><b>ถือเอาไม่ได้</b> เช่น ดวงดาว แสงแดด</li><li><b>โอนไม่ได้โดยชอบด้วยกฎหมาย</b> เช่น ที่วัด ที่ธรณีสงฆ์</li></ol><p>ทรัพย์ในพาณิชย์ คือทรัพย์ที่เหลือเมื่อหักทรัพย์นอกพาณิชย์ออก</p>"},
+{"g":"B","k":"m","n":"144","t":"ส่วนควบ","b":"<div class=\"law\">มาตรา 144 ส่วนควบของทรัพย์ หมายความว่า ส่วนซึ่งโดยสภาพแห่งทรัพย์หรือโดยจารีตประเพณีแห่งท้องถิ่นเป็นสาระสำคัญในความเป็นอยู่ของทรัพย์นั้น และไม่อาจแยกจากกันได้นอกจากจะทำลาย ทำให้บุบสลาย หรือทำให้ทรัพย์นั้นเปลี่ยนแปลงรูปทรงหรือสภาพไป<span class=\"v\">วรรคสอง เจ้าของทรัพย์ย่อมมีกรรมสิทธิ์ในส่วนควบของทรัพย์นั้น</span></div><h4>ต้องครบ 2 ข้อ</h4><ol><li>เป็น<b>สาระสำคัญ</b>ในความเป็นอยู่ โดยสภาพหรือจารีตประเพณีท้องถิ่น</li><li><b>แยกไม่ได้</b> เว้นแต่ทำลาย บุบสลาย หรือเปลี่ยนรูปทรงสภาพ</li></ol><p>ผล เจ้าของทรัพย์ประธานมีกรรมสิทธิ์ในส่วนควบ</p>"},
+{"g":"B","k":"m","n":"145","t":"ไม้ยืนต้น ไม้ล้มลุก ธัญชาติ","b":"<div class=\"law\">มาตรา 145 ไม้ยืนต้นเป็นส่วนควบกับที่ดินที่ไม้นั้นขึ้นอยู่<span class=\"v\">วรรคสอง ไม้ล้มลุกหรือธัญชาติอันจะเก็บเกี่ยวรวงผลได้คราวหนึ่งหรือหลายคราวต่อปีไม่เป็นส่วนควบกับที่ดิน</span></div><ul><li>ไม้ยืนต้น <b>เป็นส่วนควบ</b>โดยผลของกฎหมาย</li><li>ไม้ล้มลุก ธัญชาติ <b>ไม่เป็นส่วนควบ</b></li></ul>"},
+{"g":"B","k":"m","n":"146","t":"ข้อยกเว้นหลักส่วนควบ","b":"<div class=\"law\">มาตรา 146 ทรัพย์ซึ่งติดกับที่ดินหรือติดกับโรงเรือนเพียงชั่วคราวไม่ถือว่าเป็นส่วนควบกับที่ดินหรือโรงเรือนนั้น ความข้อนี้ให้ใช้บังคับแก่โรงเรือนหรือสิ่งปลูกสร้างอย่างอื่น ซึ่งผู้มีสิทธิในที่ดินของผู้อื่นใช้สิทธินั้นปลูกสร้างไว้ในที่ดินนั้นด้วย</div><ol><li>ติดกับที่ดินหรือโรงเรือน<b>เพียงชั่วคราว</b></li><li>โรงเรือนหรือสิ่งปลูกสร้างที่<b>ผู้มีสิทธิในที่ดินผู้อื่นใช้สิทธินั้น</b>ปลูกสร้าง เช่น ผู้เช่าสร้างบ้านตามสัญญา</li></ol><p>ตามสรุปในชั้น เช่าที่สร้างบ้าน 30 ปี ครบกำหนดแล้วก็ยังไม่เป็นส่วนควบ แต่เจ้าของที่ดินฟ้องให้รื้อถอนขับไล่ได้ เว้นแต่ตกลงยกให้</p>"},
+{"g":"B","k":"m","n":"147","t":"อุปกรณ์","b":"<div class=\"law\">มาตรา 147 อุปกรณ์ หมายความว่า สังหาริมทรัพย์ซึ่งโดยปกตินิยมเฉพาะถิ่นหรือโดยเจตนาชัดแจ้งของเจ้าของทรัพย์ที่เป็นประธาน เป็นของใช้ประจำอยู่กับทรัพย์ที่เป็นประธานเป็นอาจิณเพื่อประโยชน์แก่การจัดดูแล ใช้สอย หรือรักษาทรัพย์ที่เป็นประธาน และเจ้าของทรัพย์ได้นำมาสู่ทรัพย์ที่เป็นประธานโดยการนำมาติดต่อหรือปรับเข้าไว้ หรือทำโดยประการอื่นใดในฐานะเป็นของใช้ประกอบกับทรัพย์ที่เป็นประธานนั้น<span class=\"v\">วรรคสอง อุปกรณ์ที่แยกออกจากทรัพย์ที่เป็นประธานเป็นการชั่วคราวก็ยังไม่ขาดจากการเป็นอุปกรณ์ของทรัพย์ที่เป็นประธานนั้น</span><span class=\"v\">วรรคสาม อุปกรณ์ย่อมตกติดไปกับทรัพย์ที่เป็นประธาน เว้นแต่จะมีการกำหนดไว้เป็นอย่างอื่น</span></div><ol><li>เป็น<b>สังหา</b> ใช้ประจำกับทรัพย์ประธานเป็นอาจิณ</li><li>เพื่อจัดดูแล ใช้สอย หรือรักษาทรัพย์ประธาน</li><li><b>เจ้าของทรัพย์ประธาน</b>เป็นผู้นำมา</li></ol>"},
+{"g":"B","k":"m","n":"148","t":"ดอกผล","b":"<div class=\"law\">มาตรา 148 ดอกผลของทรัพย์ ได้แก่ ดอกผลธรรมดาและดอกผลนิตินัย<span class=\"v\">ดอกผลธรรมดา หมายความว่า สิ่งที่เกิดขึ้นตามธรรมชาติของทรัพย์ ซึ่งได้มาจากตัวทรัพย์ โดยการมีหรือใช้ทรัพย์นั้นตามปกตินิยม และสามารถถือเอาได้เมื่อขาดจากทรัพย์นั้น</span><span class=\"v\">ดอกผลนิตินัย หมายความว่า ทรัพย์หรือประโยชน์อย่างอื่นที่ได้มาเป็นครั้งคราวแก่เจ้าของทรัพย์จากผู้อื่นเพื่อการที่ได้ใช้ทรัพย์นั้น และสามารถคำนวณและถือเอาได้เป็นรายวันหรือตามระยะเวลาที่กำหนดไว้</span></div><p>กำไรจากการขาย<b>ไม่ใช่ดอกผล</b> เพราะแม่ทรัพย์เสียไป</p>"},
+{"g":"C","k":"m","n":"1304","t":"สาธารณสมบัติของแผ่นดิน","b":"<div class=\"law\">มาตรา 1304 สาธารณสมบัติของแผ่นดินนั้น รวมทรัพย์สินทุกชนิดของแผ่นดินซึ่งใช้เพื่อสาธารณประโยชน์หรือสงวนไว้เพื่อประโยชน์ร่วมกัน เช่น<span class=\"v\">(1) ที่ดินรกร้างว่างเปล่า และที่ดินซึ่งมีผู้เวนคืนหรือทอดทิ้งหรือกลับมาเป็นของแผ่นดินโดยประการอื่น ตามกฎหมายที่ดิน</span><span class=\"v\">(2) ทรัพย์สินสำหรับพลเมืองใช้ร่วมกัน เป็นต้นว่า ที่ชายตลิ่ง ทางน้ำ ทางหลวง ทะเลสาบ</span><span class=\"v\">(3) ทรัพย์สินใช้เพื่อประโยชน์ของแผ่นดินโดยเฉพาะ เป็นต้นว่า ป้อมและโรงทหาร สำนักราชการบ้านเมือง เรือรบ อาวุธยุทธภัณฑ์</span></div><p>ใช้เพื่อ<b>สาธารณประโยชน์</b> หรือ<b>สงวนไว้เพื่อประโยชน์ร่วมกัน</b> ตัวบทยกตัวอย่างไว้ 3 ประเภทเท่านั้น</p>"},
+{"g":"C","k":"m","n":"1305","t":"ห้ามโอนสาธารณสมบัติ","b":"<div class=\"law\">มาตรา 1305 ทรัพย์สินซึ่งเป็นสาธารณสมบัติของแผ่นดินนั้นจะโอนแก่กันมิได้ เว้นแต่อาศัยอำนาจแห่งบทกฎหมายเฉพาะหรือพระราชกฤษฎีกา</div><p>ยกที่ดินให้เป็นทางสาธารณะแล้ว <b>ขอคืนเองไม่ได้</b></p>"},
+{"g":"C","k":"m","n":"1306","t":"ห้ามยกอายุความสู้แผ่นดิน","b":"<div class=\"law\">มาตรา 1306 ท่านห้ามมิให้ยกอายุความขึ้นเป็นข้อต่อสู้กับแผ่นดินในเรื่องทรัพย์สินอันเป็นสาธารณสมบัติของแผ่นดิน</div><p>ใช้<b>เฉพาะสาธารณสมบัติ</b>ตามมาตรา 1304 ทรัพย์สินของแผ่นดินธรรมดา เช่น เก้าอี้ของมหาวิทยาลัย ไม่เข้ามาตรานี้</p>"},
+{"g":"C","k":"m","n":"1307","t":"ห้ามยึดทรัพย์สินของแผ่นดิน","b":"<div class=\"law\">มาตรา 1307 ท่านห้ามมิให้ยึดทรัพย์สินของแผ่นดิน ไม่ว่าทรัพย์สินนั้นจะเป็นสาธารณสมบัติของแผ่นดินหรือไม่</div><p><b>กว้างกว่ามาตรา 1306</b> ครอบคลุมทรัพย์สินของแผ่นดินทุกชนิด</p>"},
+{"g":"D","k":"m","n":"1298","t":"ทรัพยสิทธิเกิดได้ด้วยอำนาจกฎหมาย","b":"<div class=\"law\">มาตรา 1298 ทรัพยสิทธิทั้งหลายนั้น ท่านว่าจะก่อตั้งขึ้นได้แต่ด้วยอาศัยอำนาจในประมวลกฎหมายนี้หรือกฎหมายอื่น</div><p>หลัก <b>Numerus Clausus</b> คู่สัญญาสร้างทรัพยสิทธิขึ้นเองไม่ได้</p>"},
+{"g":"D","k":"m","n":"1336","t":"สิทธิของเจ้าของทรัพย์สิน","b":"<div class=\"law\">มาตรา 1336 ภายในบังคับแห่งกฎหมาย เจ้าของทรัพย์สินมีสิทธิใช้สอยและจำหน่ายทรัพย์สินของตนและได้ซึ่งดอกผลแห่งทรัพย์สินนั้น กับทั้งมีสิทธิติดตามและเอาคืนซึ่งทรัพย์สินของตนจากบุคคลผู้ไม่มีสิทธิจะยึดถือไว้ และมีสิทธิขัดขวางมิให้ผู้อื่นสอดเข้าเกี่ยวข้องกับทรัพย์สินนั้นโดยมิชอบด้วยกฎหมาย</div><p>ใช้สอย จำหน่าย <b>ได้ดอกผล</b> ติดตามเอาคืน ขัดขวางการรบกวน</p>"},
+{"g":"D","k":"m","n":"1375","t":"ถูกแย่งการครอบครอง","b":"<div class=\"law\">มาตรา 1375 ถ้าผู้ครอบครองถูกแย่งการครอบครองโดยมิชอบด้วยกฎหมายไซร้ ท่านว่าผู้ครอบครองมีสิทธิจะได้คืนซึ่งการครอบครอง เว้นแต่อีกฝ่ายหนึ่งมีสิทธิเหนือทรัพย์สินดีกว่าซึ่งจะเป็นเหตุให้เรียกคืนจากผู้ครอบครองได้<span class=\"v\">วรรคสอง การฟ้องคดีเพื่อเอาคืนซึ่งการครอบครองนั้น ท่านว่าต้องฟ้องภายในปีหนึ่งนับแต่เวลาถูกแย่งการครอบครอง</span></div><ol><li>ถูกแย่งโดยมิชอบ</li><li>เรียกคืนได้ เว้นแต่ผู้แย่งมีสิทธิดีกว่า</li><li>ฟ้องภายใน <b>1 ปี</b></li></ol><p>โยงมาตรา 1299 วรรคสองด้วย</p>"},
+{"g":"D","k":"m","n":"1382","t":"ครอบครองปรปักษ์","b":"<div class=\"law\">มาตรา 1382 บุคคลใดครอบครองทรัพย์สินของผู้อื่นไว้โดยความสงบและโดยเปิดเผยด้วยเจตนาเป็นเจ้าของ ถ้าเป็นอสังหาริมทรัพย์ได้ครอบครองติดต่อกันเป็นเวลาสิบปี ถ้าเป็นสังหาริมทรัพย์ได้ครอบครองติดต่อกันเป็นเวลาห้าปีไซร้ ท่านว่าบุคคลนั้นได้กรรมสิทธิ์</div><ol><li>ทรัพย์สินของผู้อื่น</li><li>โดยสงบ</li><li>โดยเปิดเผย</li><li>ด้วยเจตนาเป็นเจ้าของ</li><li>ติดต่อกัน อสังหา <b>10 ปี</b> สังหา <b>5 ปี</b></li></ol><p>ได้กรรมสิทธิ์ แต่ต้อง<b>ยื่นคำร้องขอต่อศาล</b> ไม่ใช่ฟ้อง</p>"},
+{"g":"D","k":"m","n":"1401","t":"ภาระจำยอมโดยอายุความ","b":"<div class=\"law\">มาตรา 1401 ภาระจำยอมอาจได้มาโดยอายุความ ท่านให้นำบทบัญญัติว่าด้วยอายุความได้สิทธิอันกล่าวไว้ในลักษณะ 3 แห่งบรรพนี้มาใช้บังคับโดยอนุโลม</div><p>อนุโลม<b>มาตรา 1382</b> ใช้ทางโดยสงบ เปิดเผย เจตนาใช้เป็นสิทธิ <b>10 ปี</b> เป็นการได้มาโดยทางอื่นนอกจากนิติกรรม</p>"},
+{"g":"E","k":"m","n":"1299","sub":"วรรคหนึ่ง","t":"ได้อสังหามาโดยนิติกรรม","b":"<div class=\"law\">มาตรา 1299 ภายในบังคับแห่งบทบัญญัติในประมวลกฎหมายนี้หรือกฎหมายอื่น ท่านว่าการได้มาโดยนิติกรรมซึ่งอสังหาริมทรัพย์หรือทรัพยสิทธิอันเกี่ยวกับอสังหาริมทรัพย์นั้นไม่บริบูรณ์ เว้นแต่นิติกรรมจะได้ทำเป็นหนังสือและได้จดทะเบียนการได้มากับพนักงานเจ้าหน้าที่</div><p>พระเอก คือผู้ได้มา<b>โดยนิติกรรม</b> แต่ไม่ได้จดทะเบียน</p><ul><li>ซื้อขาย แลกเปลี่ยน ให้ จำนอง ไม่ทำตามแบบ <b>โมฆะ</b></li><li>นิติกรรมอื่น <b>ไม่บริบูรณ์เป็นทรัพยสิทธิ</b> เป็นบุคคลสิทธิระหว่างคู่กรณี</li></ul><p>เขียนตอบใช้คำว่า บัญญัติว่า ไม่ใช้ วางหลัก</p>"},
+{"g":"E","k":"m","n":"1299","sub":"วรรคสอง","t":"ได้อสังหามาโดยทางอื่นนอกจากนิติกรรม","b":"<div class=\"law\">มาตรา 1299 วรรคสอง ถ้ามีผู้ได้มาซึ่งอสังหาริมทรัพย์หรือทรัพยสิทธิอันเกี่ยวกับอสังหาริมทรัพย์โดยทางอื่นนอกจากนิติกรรม สิทธิของผู้ได้มานั้น ถ้ายังมิได้จดทะเบียนไซร้ ท่านว่าจะมีการเปลี่ยนแปลงทางทะเบียนไม่ได้ และสิทธิอันยังมิได้จดทะเบียนนั้น มิให้ยกขึ้นเป็นข้อต่อสู้บุคคลภายนอกผู้ได้สิทธิมาโดยเสียค่าตอบแทนและโดยสุจริต และได้จดทะเบียนสิทธิโดยสุจริตแล้ว</div><p>พระเอก คือผู้ได้มา<b>โดยทางอื่น</b> เช่น ปรปักษ์ ภาระจำยอมโดยอายุความ มรดก</p><ol><li>เปลี่ยนแปลงทางทะเบียนไม่ได้</li><li>ยกขึ้นสู้บุคคลภายนอกไม่ได้ ถ้าบุคคลภายนอก<b>สุจริต เสียค่าตอบแทน จดทะเบียนโดยสุจริต</b></li><li>องค์ประกอบที่ 4 จากฎีกาที่ 800 ปี 2502 สิทธิต้องเป็นประเภทเดียวกัน</li></ol>"},
+{"g":"E","k":"m","n":"1300","t":"เพิกถอนการจดทะเบียนที่เสียเปรียบ","b":"<div class=\"law\">มาตรา 1300 ถ้าได้จดทะเบียนการโอนอสังหาริมทรัพย์หรือทรัพยสิทธิอันเกี่ยวกับอสังหาริมทรัพย์เป็นทางเสียเปรียบแก่บุคคลผู้อยู่ในฐานะอันจะให้จดทะเบียนสิทธิของตนได้อยู่ก่อนไซร้ ท่านว่าบุคคลนั้นอาจเรียกให้เพิกถอนการจดทะเบียนนั้นได้ แต่การโอนอันมีค่าตอบแทน ซึ่งผู้รับโอนกระทำการโดยสุจริตนั้น ไม่ว่ากรณีจะเป็นประการใด ท่านว่าจะเรียกให้เพิกถอนทะเบียนไม่ได้</div><ol><li>จดทะเบียนโอนอสังหาหรือทรัพยสิทธิเกี่ยวกับอสังหา</li><li>เป็นทางเสียเปรียบ</li><li>แก่<b>ผู้อยู่ในฐานะอันจะให้จดทะเบียนสิทธิของตนได้อยู่ก่อน</b></li><li>เรียกให้เพิกถอนได้</li></ol><p>ข้อยกเว้น โอน<b>มีค่าตอบแทน</b>และผู้รับโอน<b>สุจริต</b> เพิกถอนไม่ได้</p>"},
+{"g":"E","k":"m","n":"1301","t":"อนุโลมถึงการเปลี่ยนแปลง ระงับ กลับคืน","b":"<div class=\"law\">มาตรา 1301 บทบัญญัติแห่งสองมาตราก่อนนี้ ท่านให้ใช้บังคับถึงการเปลี่ยนแปลง ระงับ และกลับคืนมาแห่งทรัพยสิทธิอันเกี่ยวกับอสังหาริมทรัพย์นั้นด้วยโดยอนุโลม</div><p>นำมาตรา 1299 และ 1300 ไปใช้ เช่น ภาระจำยอมสิ้นไปเพราะไม่ใช้ 10 ปี ต้องไปจดทะเบียน</p>"},
+{"g":"E","k":"m","n":"1302","t":"อนุโลมถึงสังหาพิเศษ","b":"<div class=\"law\">มาตรา 1302 บทบัญญัติแห่งสามมาตราก่อนนี้ ให้ใช้บังคับถึงเรือมีระวางตั้งแต่ห้าตันขึ้นไป ทั้งแพและสัตว์พาหนะด้วยโดยอนุโลม</div><p>มาตรา 1299 ถึง 1301 ใช้กับ<b>เรือตั้งแต่ 5 ตัน แพ สัตว์พาหนะ</b></p>"},
+{"g":"E","k":"m","n":"1303","t":"สังหาเดียวกัน หลายคนอ้างกรรมสิทธิ์","b":"<div class=\"law\">มาตรา 1303 ถ้าบุคคลหลายคนเรียกเอาสังหาริมทรัพย์เดียวกัน โดยอาศัยหลักกรรมสิทธิ์ต่างกันไซร้ ท่านว่าทรัพย์สินตกอยู่ในครอบครองของบุคคลใด บุคคลนั้นมีสิทธิยิ่งกว่าบุคคลอื่น ๆ แต่ต้องได้ทรัพย์นั้นมาโดยมีค่าตอบแทนและได้การครอบครองโดยสุจริต<span class=\"v\">วรรคสอง ท่านมิให้ใช้มาตรานี้บังคับถึงสังหาริมทรัพย์ซึ่งระบุไว้ในมาตราก่อนและในเรื่องทรัพย์สินหาย กับทรัพย์สินที่ได้มาโดยการกระทำผิด</span></div><p>ผู้<b>ครอบครอง</b> ที่ได้มา<b>มีค่าตอบแทน</b> และ<b>สุจริต</b> ชนะ</p><p>ยกเว้น สังหาพิเศษตามมาตรา 1302 ทรัพย์สินหาย และทรัพย์สินที่ได้มาโดยการกระทำผิด</p>"},
+{"g":"F","k":"m","n":"152","t":"ไม่ทำตามแบบ","b":"<div class=\"law\">มาตรา 152 การใดมิได้ทำให้ถูกต้องตามแบบที่กฎหมายบังคับไว้ การนั้นเป็นโมฆะ</div><p>ใช้คู่มาตรา 456 519 525 714</p>"},
+{"g":"F","k":"m","n":"237","t":"เจ้าหนี้เพิกถอนการฉ้อฉล","b":"<div class=\"law\">มาตรา 237 เจ้าหนี้ชอบที่จะร้องขอให้ศาลเพิกถอนเสียได้ซึ่งนิติกรรมใด ๆ อันลูกหนี้ได้กระทำลงทั้งรู้อยู่ว่าจะเป็นทางให้เจ้าหนี้เสียเปรียบ แต่ความข้อนี้ท่านมิให้ใช้บังคับ ถ้าปรากฏว่าในขณะที่ทำนิติกรรมนั้น บุคคลซึ่งเป็นผู้ได้ลาภงอกแต่การนั้นมิได้รู้เท่าถึงข้อความจริงอันเป็นทางให้เจ้าหนี้ต้องเสียเปรียบนั้นด้วย แต่หากกรณีเป็นการทำให้โดยเสน่หา ท่านว่าเพียงแต่ลูกหนี้เป็นผู้รู้ฝ่ายเดียวเท่านั้นก็พอแล้วที่จะขอเพิกถอนได้<span class=\"v\">วรรคสอง บทบัญญัติดังกล่าวมาในวรรคก่อนนี้ ท่านมิให้ใช้บังคับแก่นิติกรรมใดอันมิได้มีวัตถุเป็นสิทธิในทรัพย์สิน</span></div><p>เป็นเรื่อง<b>หนี้</b> รักษากองทรัพย์สินลูกหนี้ให้พอชำระหนี้ ต่างจากมาตรา 1300 ที่เป็นเรื่องทรัพย์</p>"},
+{"g":"F","k":"m","n":"456","t":"แบบของสัญญาซื้อขาย","b":"<div class=\"law\">มาตรา 456 การซื้อขายอสังหาริมทรัพย์ ถ้ามิได้ทำเป็นหนังสือและจดทะเบียนต่อพนักงานเจ้าหน้าที่เป็นโมฆะ วิธีนี้ให้ใช้ถึงซื้อขายเรือมีระวางตั้งแต่ห้าตันขึ้นไป ทั้งซื้อขายแพและสัตว์พาหนะด้วย<span class=\"v\">วรรคสอง สัญญาจะขายหรือจะซื้อ หรือคำมั่นในการซื้อขายทรัพย์สินตามที่ระบุไว้ในวรรคหนึ่ง ถ้ามิได้มีหลักฐานเป็นหนังสืออย่างหนึ่งอย่างใดลงลายมือชื่อฝ่ายผู้ต้องรับผิดเป็นสำคัญ หรือได้วางประจำไว้หรือได้ชำระหนี้บางส่วนแล้ว จะฟ้องร้องให้บังคับคดีหาได้ไม่</span><span class=\"v\">วรรคสาม บทบัญญัติที่กล่าวมาในวรรคก่อนนี้ ให้ใช้บังคับถึงสัญญาซื้อขายสังหาริมทรัพย์ซึ่งตกลงกันเป็นราคาสองหมื่นบาท หรือกว่านั้นขึ้นไปด้วย</span></div><ol><li>ซื้อขายเสร็จเด็ดขาด อสังหาและสังหาพิเศษ ไม่ทำตามแบบ <b>โมฆะ</b></li><li>สัญญาจะซื้อจะขาย และสังหาตั้งแต่ 20,000 บาท ขาดหลักฐาน มัดจำ ชำระบางส่วน <b>ฟ้องบังคับไม่ได้</b></li></ol>"},
+{"g":"F","k":"m","n":"519","t":"แลกเปลี่ยน","b":"<div class=\"law\">มาตรา 519 บทบัญญัติทั้งหลายในลักษณะซื้อขายนั้น ท่านให้ใช้ถึงการแลกเปลี่ยนด้วย โดยให้ถือว่าผู้เป็นคู่สัญญาแลกเปลี่ยนเป็นผู้ขายในส่วนทรัพย์สินซึ่งตนได้ส่งมอบ และเป็นผู้ซื้อในส่วนทรัพย์สินซึ่งตนได้รับในการแลกเปลี่ยนนั้น</div><p>นำแบบตามมาตรา 456 มาใช้ด้วย</p>"},
+{"g":"F","k":"m","n":"525","t":"แบบของการให้","b":"<div class=\"law\">มาตรา 525 การให้ทรัพย์สินซึ่งถ้าจะซื้อขายกันจะต้องทำเป็นหนังสือและจดทะเบียนต่อพนักงานเจ้าหน้าที่นั้น ท่านว่าย่อมสมบูรณ์ต่อเมื่อได้ทำเป็นหนังสือและจดทะเบียนต่อพนักงานเจ้าหน้าที่ ในกรณีเช่นนี้ การให้ย่อมเป็นอันสมบูรณ์โดยมิพักต้องส่งมอบ</div><p>ผู้รับให้โดยเสน่หา<b>ไม่ได้เสียค่าตอบแทน</b> จึงไม่ใช่บุคคลภายนอกตามมาตรา 1299 วรรคสอง</p>"},
+{"g":"F","k":"m","n":"714","t":"แบบของสัญญาจำนอง","b":"<div class=\"law\">มาตรา 714 อันสัญญาจำนองนั้น ท่านว่าต้องทำเป็นหนังสือและจดทะเบียนต่อพนักงานเจ้าหน้าที่</div><p><b>ไม่ต้องส่งมอบ</b>ทรัพย์ ต่างจากจำนำ</p>"},
+{"g":"F","k":"m","n":"1599","t":"มรดกตกทอด","b":"<div class=\"law\">มาตรา 1599 เมื่อบุคคลใดตาย มรดกของบุคคลนั้นตกทอดแก่ทายาท<span class=\"v\">วรรคสอง ทายาทอาจเสียไปซึ่งสิทธิในมรดกได้แต่โดยบทบัญญัติแห่งประมวลกฎหมายนี้หรือกฎหมายอื่น</span></div>"},
+{"g":"F","k":"m","n":"1600","t":"กองมรดก","b":"<div class=\"law\">มาตรา 1600 ภายใต้บังคับของบทบัญญัติแห่งประมวลกฎหมายนี้ กองมรดกของผู้ตายได้แก่ทรัพย์สินทุกชนิดของผู้ตาย ตลอดทั้งสิทธิหน้าที่และความรับผิดต่าง ๆ เว้นแต่ตามกฎหมายหรือว่าโดยสภาพแล้ว เป็นการเฉพาะตัวของผู้ตายโดยแท้</div><p>ทายาทรับทั้งสิทธิและหน้าที่ จึง<b>ไม่ใช่บุคคลภายนอก</b>ตามมาตรา 1299 วรรคสอง</p>"},
+{"g":"G","k":"d","n":"800 ปี 2502","sub":"ประชุมใหญ่","t":"ภาระจำยอมกับผู้ซื้อสุจริต","b":"<p>ผู้ซื้อที่ดินโดยสุจริต ไม่รู้ว่าตกอยู่ในภาระจำยอม จะยกการรับโอนโดยสุจริตขึ้นต่อสู้ให้ภาระจำยอมสิ้นไป<b>ไม่ได้</b> เพราะเป็น<b>สิทธิคนละประเภท</b></p><ul><li>ภาระจำยอมโดยอายุความเป็นสิทธิรอนกรรมสิทธิ์ ผู้ซื้อได้กรรมสิทธิ์</li><li>เป็นที่มาขององค์ประกอบที่ 4 ของมาตรา 1299 วรรคสอง ซึ่งไม่มีในตัวบท</li></ul><h4>ถ้าต้องแย้ง</h4><ol><li>ศาลสร้างองค์ประกอบนอกตัวบท ขัดหลักคุ้มครองระบบทะเบียน</li><li>ทางออกอื่น ผู้ซื้อที่ไม่ไปดูที่ดินเลย ไม่สุจริตเพราะประมาทเลินเล่ออย่างร้ายแรง</li></ol><p>แนวเดียวกัน ฎีกาที่ 715 ปี 2521 และ 165 ปี 2522</p>"},
+{"g":"H","k":"q","n":"ผลของการไม่ทำตามแบบในมาตรา 1299 วรรคหนึ่ง แยกเป็นกี่กรณี","t":"","b":"<ol><li><b>โมฆะ</b> ซื้อขาย มาตรา 456 แลกเปลี่ยน มาตรา 519 ให้ มาตรา 525 จำนอง มาตรา 714 ประกอบมาตรา 152</li><li><b>ไม่บริบูรณ์เป็นทรัพยสิทธิ</b> นิติกรรมอื่น เช่น ภาระจำยอมโดยสัญญา ใช้ได้เป็นบุคคลสิทธิ ยันได้เฉพาะคู่กรณี</li></ol>"},
+{"g":"H","k":"q","n":"ใครบ้างคือผู้อยู่ในฐานะอันจะให้จดทะเบียนสิทธิของตนได้อยู่ก่อน ตามมาตรา 1300","t":"","b":"<ul><li>ผู้ได้มาตามมาตรา 1299 วรรคหนึ่ง ที่ไม่ใช่สี่ประเภทโมฆะ</li><li>ผู้ได้มาตามมาตรา 1299 วรรคสอง</li></ul><p><b>ไม่รวม</b>ผู้จะซื้อ เว้นแต่ชำระครบและเข้าครอบครองแล้ว</p>"},
+{"g":"H","k":"q","n":"ตองฝากแม่กระต่ายไว้กับป้อ แล้วกระต่ายออกลูก ถ้าตองขายฝากแทน ผลต่างกันไหม","t":"","b":"<ul><li>ฝากไว้ กรรมสิทธิ์ยังเป็นของตอง ลูกเป็นดอกผลธรรมดา ตามเรื่องดอกผลมาตรา 148 <b>เป็นของตอง</b> ตามมาตรา 1336</li><li>ขายฝาก กรรมสิทธิ์โอนไปแล้ว ลูก<b>เป็นของผู้ซื้อฝาก</b></li></ul>"},
+{"g":"H","k":"q","n":"การแบ่งอสังหากับสังหามีประโยชน์อะไรในระบบกฎหมาย","t":"","b":"<ul><li>แบบนิติกรรม มาตรา 456 และมาตรา 1299 วรรคหนึ่ง</li><li>เวลาครอบครองปรปักษ์ 10 ปี กับ 5 ปี มาตรา 1382</li><li>รู้ตัวเจ้าของ อสังหาดูทะเบียน สังหาดูการครอบครอง</li></ul>"},
+{"g":"H","k":"q","n":"การยกที่ดินให้เป็นสาธารณสมบัติ แบบชัดแจ้งกับแบบปริยายต่างกันอย่างไร","t":"","b":"<ul><li><b>ชัดแจ้ง</b> แสดงเจตนายกให้ โดยมีขอบเขตที่ดินชัดเจน ก็เพียงพอ</li><li><b>ปริยาย</b> เช่น ปล่อยให้ประชาชนใช้เป็นทาง ไม่ใช่หลักปรปักษ์ แต่ต้องนานพอที่ศาลเห็นว่ายกให้</li><li>ผู้ที่ไม่มีกรรมสิทธิ์แล้ว เช่น ถูกครอบครองปรปักษ์ไปแล้ว ยกให้แผ่นดินไม่ได้</li></ul>"}];
+CARDS.forEach(function(c,i){c.id='t'+i;});
+var byId={}; CARDS.forEach(function(c){byId[c.id]=c;});
+var KEY='property_mid_flash_select_v1';
+function load(){try{var r=localStorage.getItem(KEY);return r?JSON.parse(r):{};}catch(e){return {};}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(progress));}catch(e){}}
+var progress=load(), active=null, unsureOnly=false, order=[], pos=0, flipped=false, shuffled=null;
+var $=function(id){return document.getElementById(id);};
+var row=$('grouprow');
+function chip(label,val,n){var b=document.createElement('button');b.type='button';b.className='gchip'+(val==='X'?' exam':'');b.dataset.val=val;b.setAttribute('aria-pressed','false');b.innerHTML=label+'<span class="n">'+n+'</span>';return b;}
+row.appendChild(chip('ทั้งหมด','__all__',CARDS.length));
+GROUPS.forEach(function(g){row.appendChild(chip(g[1],g[0],CARDS.filter(function(c){return c.g===g[0];}).length));});
+function paintChips(){Array.prototype.forEach.call(row.children,function(ch){var v=ch.dataset.val;ch.setAttribute('aria-pressed',(v==='__all__'?active===null:active===v)?'true':'false');});}
+row.addEventListener('click',function(e){var b=e.target.closest('.gchip');if(!b)return;active=b.dataset.val==='__all__'?null:b.dataset.val;paintChips();rebuild();});
+function rebuild(){
+  var base=shuffled?shuffled.map(function(id){return byId[id];}):CARDS;
+  order=base.filter(function(c){return (active===null||c.g===active)&&(!unsureOnly||progress[c.id]==='review');}).map(function(c){return c.id;});
+  pos=0; render();
+}
+function frontHTML(c){
+  var st=progress[c.id], stt=st?'<span class="state '+st+'">'+(st==='know'?'จำได้แล้ว':'ยังไม่แม่น')+'</span>':'<span></span>';
+  var tag=c.k==='m'?'มาตรา':(c.k==='d'?'ฎีกา':(c.g==='X'?'ข้อสอบเก่า':'หลักคิด'));
+  var head='<div class="facehead">'+stt+'<span class="numtag mono'+(c.g==='X'?' exam':'')+'">'+tag+'</span></div>';
+  var body;
+  if(c.k==='m') body='<div class="big">มาตรา '+c.n+(c.sub?'<small>'+c.sub+'</small>':'')+'</div>';
+  else if(c.k==='d') body='<div class="big" style="font-size:clamp(34px,10vw,52px)">ฎีกาที่ '+c.n+(c.sub?'<small>'+c.sub+'</small>':'')+'</div>';
+  else body='<div class="ask">'+c.n+'</div>'+(c.s?'<div class="src">'+c.s+'</div>':'');
+  return head+'<div class="frontbody">'+body+'</div><div class="hint">แตะเพื่อพลิก ปัดซ้ายขวาเพื่อเปลี่ยนใบ</div>';
+}
+function guideHTML(gd){
+  var h='<div class="guide"><div class="gtitle">Guide โครงสร้างคำตอบ</div>';
+  gd.forEach(function(x,i){
+    var secs=x[1].map(function(s){return 'มาตรา '+s+' บัญญัติว่า ........';}).join(' และ');
+    h+='<div class="gstep"><p><b>ประเด็น'+(gd.length>1?'ที่ '+(i+1):'')+'</b> '+x[0]+'หรือไม่</p>'+
+      '<p><b>หลักกฎหมาย</b> ประมวลกฎหมายแพ่งและพาณิชย์ '+secs+' โดยมีองค์ประกอบ ........</p>'+
+      '<p><b>ปรับบท</b> ตามข้อเท็จจริง '+x[2]+'</p></div>';
+  });
+  h+='<div class="gstep"><p><b>สรุป</b> ดังนั้น ........ '+(gd.length>1?'ตอบให้ครบทุกประเด็น ':'')+'เพราะ ........ ตามมาตรา ........</p></div></div>';
+  return h;
+}
+function backHTML(c){
+  var label=c.k==='m'?('มาตรา '+c.n+(c.sub?' '+c.sub:'')):(c.k==='d'?('ฎีกาที่ '+c.n):GN[c.g]);
+  return '<div class="facehead"><span class="cattag">'+GN[c.g]+'</span><span class="numtag mono'+(c.g==='X'?' exam':'')+'">'+label+'</span></div><div class="backbody">'+(c.t?'<p class="topic">'+c.t+'</p>':'')+c.b+(c.gd?guideHTML(c.gd):'')+'</div>';
+}
+function render(){
+  var card=$('card');
+  if(!order.length){
+    $('front').innerHTML='<div class="frontbody"><div class="ask" style="text-align:center;font-size:20px">ยังไม่มีใบที่ติดสถานะยังไม่แม่นในหมวดนี้</div></div>';
+    $('back').innerHTML=''; $('posLabel').textContent='0 จาก 0'; $('progFill').style.width='0%'; stats(); return;
+  }
+  var c=byId[order[pos]]; flipped=false; card.classList.remove('flipped');
+  $('front').innerHTML=frontHTML(c); $('back').innerHTML=backHTML(c);
+  $('posLabel').textContent=(pos+1)+' จาก '+order.length;
+  $('progFill').style.width=((pos+1)/order.length*100)+'%';
+  $('btnKnow').setAttribute('aria-pressed',progress[c.id]==='know'?'true':'false');
+  $('btnReview').setAttribute('aria-pressed',progress[c.id]==='review'?'true':'false');
+  stats();
+}
+function stats(){var k=0,r=0;CARDS.forEach(function(c){if(progress[c.id]==='know')k++;else if(progress[c.id]==='review')r++;});$('knowLabel').textContent='จำได้ '+k;$('sTotal').textContent=CARDS.length;$('sKnow').textContent=k;$('sReview').textContent=r;}
+function flip(){if(!order.length)return;flipped=!flipped;$('card').classList.toggle('flipped',flipped);if(!flipped){var bb=document.querySelector('.backbody');if(bb)bb.scrollTop=0;}}
+function go(d){if(!order.length)return;pos=(pos+d+order.length)%order.length;render();}
+function mark(v){if(!order.length)return;var c=byId[order[pos]];if(progress[c.id]===v)delete progress[c.id];else progress[c.id]=v;save();
+  if(unsureOnly&&progress[c.id]!=='review'){var id=c.id;order=order.filter(function(x){return x!==id;});if(pos>=order.length)pos=0;render();return;}
+  render(); if(v==='know'&&progress[c.id]==='know') setTimeout(function(){go(1);},240);}
+var card=$('card'), sx=0, sy=0, swiped=false;
+card.addEventListener('touchstart',function(e){var t=e.changedTouches[0];sx=t.clientX;sy=t.clientY;swiped=false;},{passive:true});
+card.addEventListener('touchend',function(e){var t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){swiped=true;go(dx<0?1:-1);}},{passive:true});
+card.addEventListener('click',function(e){if(swiped){swiped=false;return;}if(flipped&&window.getSelection&&String(window.getSelection()).length)return;flip();});
+card.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter'){e.preventDefault();flip();}});
+document.addEventListener('keydown',function(e){if(e.target===card)return;if(e.key==='ArrowRight')go(1);else if(e.key==='ArrowLeft')go(-1);else if(e.key===' '&&e.target===document.body){e.preventDefault();flip();}});
+document.addEventListener('keydown',function(e){if(e.target===card&&(e.key==='ArrowRight'||e.key==='ArrowLeft')){go(e.key==='ArrowRight'?1:-1);}});
+$('btnFlip').onclick=flip; $('btnPrev').onclick=function(){go(-1);}; $('btnNext').onclick=function(){go(1);};
+$('btnKnow').onclick=function(){mark('know');}; $('btnReview').onclick=function(){mark('review');};
+$('btnShuffle').onclick=function(){var ids=CARDS.map(function(c){return c.id;});for(var i=ids.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=ids[i];ids[i]=ids[j];ids[j]=t;}shuffled=ids;rebuild();};
+$('btnUnsure').onclick=function(){unsureOnly=!unsureOnly;this.setAttribute('aria-pressed',unsureOnly?'true':'false');rebuild();};
+var resetArmed=false;
+$('btnReset').onclick=function(){var b=this;if(!resetArmed){resetArmed=true;b.textContent='แตะอีกครั้งเพื่อยืนยันรีเซ็ต';setTimeout(function(){resetArmed=false;b.textContent='รีเซ็ตความคืบหน้า';},3000);return;}resetArmed=false;b.textContent='รีเซ็ตความคืบหน้า';progress={};save();rebuild();};
+paintChips(); rebuild();
+})();
+</script>
+
+</body>
+</html>
